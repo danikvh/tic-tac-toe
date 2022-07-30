@@ -5,7 +5,7 @@ let gameboard = (function() {
 
     const boxes = document.getElementsByClassName("box")
 
-    
+
     const drawBoard = () => {
         for (let i = 0; i < 9; i++) {
             boxes[i].textContent = gameboard[i]
@@ -18,6 +18,15 @@ let gameboard = (function() {
             spot.textContent = "X"
             gameboard[spot.id.slice(4,5)] = "X"
         }
+    }
+
+    const playSpotAI = () => {
+        let index = Math.round(Math.random() * 9)
+        while (gameboard[index] !== "" || gameboard[index] === "X") {
+            index = Math.round(Math.random() * 9)
+        }
+        boxes[index].textContent = "O"
+        gameboard[index] = "O" 
     }
 
 
