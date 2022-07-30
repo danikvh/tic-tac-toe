@@ -1,7 +1,10 @@
 //Module for the gameboard
 let gameboard = (function() {
+
     let gameboard = new Array(9);
-    gameboard = ["X","","O","","X","","","",""]
+    gameboard = ["","","","","","","","",""]
+
+    //let playerTurn = true
 
     const boxes = document.getElementsByClassName("box")
 
@@ -11,6 +14,13 @@ let gameboard = (function() {
             boxes[i].textContent = gameboard[i]
         }
     }
+
+    const isFullBoard = () => {
+        for (let i = 0; i < 9; i++) {
+            if (gameboard[i] === "") return false
+        }
+        return true
+    }
     
     const playSpot = (event) => {
         const spot = event.target
@@ -18,17 +28,20 @@ let gameboard = (function() {
             spot.textContent = "X"
             gameboard[spot.id.slice(4,5)] = "X"
         }
+        //playerTurn = false
+        playSpotAI()
     }
 
     const playSpotAI = () => {
+        if (isFullBoard()) return
         let index = Math.round(Math.random() * 9)
         while (gameboard[index] !== "" || gameboard[index] === "X") {
             index = Math.round(Math.random() * 9)
         }
         boxes[index].textContent = "O"
         gameboard[index] = "O" 
+        //playerTurn = true
     }
-
 
     for (let i = 0; i < 9; i++) {
         boxes[i].addEventListener("click", playSpot)
@@ -39,9 +52,8 @@ let gameboard = (function() {
     }
 })()
 
-//Module for the gameController
-let gameController = (function() {
-
+//Module for the viewController
+let viewController = (function() {
     
 })()
 
