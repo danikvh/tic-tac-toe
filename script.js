@@ -3,11 +3,26 @@ let gameboard = (function() {
     let gameboard = new Array(9);
     gameboard = ["X","","O","","X","","","",""]
 
+    const boxes = document.getElementsByClassName("box")
+
+    
     const drawBoard = () => {
-        const htmlBoard = document.getElementsByClassName("answer")
         for (let i = 0; i < 9; i++) {
-            htmlBoard[i].textContent = gameboard[i]
+            boxes[i].textContent = gameboard[i]
         }
+    }
+    
+    const playSpot = (event) => {
+        const spot = event.target
+        if (spot.textContent == "") {
+            spot.textContent = "X"
+            gameboard[spot.id.slice(4,5)] = "X"
+        }
+    }
+
+
+    for (let i = 0; i < 9; i++) {
+        boxes[i].addEventListener("click", playSpot)
     }
 
     return {
@@ -18,6 +33,7 @@ let gameboard = (function() {
 //Module for the gameController
 let gameController = (function() {
 
+    
 })()
 
 //Factory for players
