@@ -3,9 +3,13 @@ let gameboard = (function() {
 
     let gameboard = new Array(9);
     gameboard = ["","","","","","","","",""]
+    let playerMark = "X"
     let winner = ""
+    let gameMode = "AI"
     const boxes = document.getElementsByClassName("box")
     const gameButton = document.getElementById("new-game-button")
+    const modeAI = document.getElementById("ai-game-mode")
+    const modeHuman = document.getElementById("human-game-mode")
 
     const isFullBoard = () => {
         for (let i = 0; i < 9; i++) {
@@ -19,7 +23,13 @@ let gameboard = (function() {
             gameboard[i] = ""
             boxes[i].textContent = ""
         }
+        playerMark = "X"
         gameButton.disabled = true;
+    }
+
+    const selectGameMode = () => {
+        if (modeAI.checked === true) gameMode = "AI"
+        else gameMode = "Human"
     }
 
     const checkWinner = () => {
@@ -89,11 +99,16 @@ let gameboard = (function() {
         if (winner !== "") return 
         const spot = event.target
         if (spot.textContent == "") {
-            spot.textContent = "X"
-            gameboard[spot.id.slice(4,5)] = "X"
+            spot.textContent = playerMark
+            gameboard[spot.id.slice(4,5)] = playerMark
         } else return
         if (checkWin()) return 
-        playSpotAI()
+
+        if (gameMode === "AI") playSpotAI()
+        else {
+            if (playerMark === "X") playerMark = "O"
+            else playerMark = "X"
+        }
     }
 
     const playSpotAI = () => {
@@ -113,6 +128,8 @@ let gameboard = (function() {
     }
 
     gameButton.addEventListener("click", resetBoard)
+    modeAI.addEventListener("click", selectGameMode)
+    modeHuman.addEventListener("click", selectGameMode)
 
     return {
         checkWin,
