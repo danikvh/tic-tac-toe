@@ -25,6 +25,7 @@ let gameboard = (function() {
         }
         playerMark = "X"
         gameButton.disabled = true;
+        document.getElementById("congratulations").style.color = "transparent"
     }
 
     const selectGameMode = () => {
@@ -144,34 +145,39 @@ let viewController = (function() {
     const player2Score = document.getElementById("player2-score")
     const player1NameButton = document.getElementById("button-player1")
     const player2NameButton = document.getElementById("button-player2")
-    const player1NameInput = document.getElementById("name1")
-    const player2NameInput = document.getElementById("name2")
+    const nameInputs = {
+        player1: document.getElementById("name1"),
+        player2: document.getElementById("name2")
+    }
+    const nameLabels = {
+        player1: document.getElementById("player1-name"),
+        player2: document.getElementById("player2-name")
+    }
+    const congrats = document.getElementById("congratulations")
 
 
     let changeName = (event) => {
         const player = event.target.id.slice(7,14)
-
-        //Condensed if / else from below
-        //let name = document.getElementById(`${player}-name`)
-        //.textContent = eval(`${player}NameInput`).value + ": "
-        //eval(`${player}NameInput`).value = ""
-
-        if (player === "player1") {
-            let name = document.getElementById("player1-name")
-            name.textContent = player1NameInput.value + ": "
-            player1NameInput.value = ""
-        } else {
-            let name = document.getElementById("player2-name")
-            name.textContent = player2NameInput.value + ": "
-            player2NameInput.value = ""
-        }
+        nameLabels[player].textContent = nameInputs[player].value
+        nameInputs[player].value = ""
     }
 
     //Called by gameboard.checkWin()
     let gameFinish = () => {
         let winner = gameboard.checkWinner()
-        if (winner === "player1") player1Score.textContent++
-        else if (winner === "player2") player2Score.textContent++
+        if (winner === "player1") {
+            player1Score.textContent++
+            congrats.textContent = document.getElementById("player1-name").textContent + " wins!"
+            congrats.style.color = "black"
+        }
+        else if (winner === "player2") {
+            player2Score.textContent++
+            congrats.textContent = document.getElementById("player2-name").textContent + " wins!"
+            congrats.style.color = "black"
+        } else { //Tie
+            congrats.textContent = "It's a tie!"
+            congrats.style.color = "black"
+        }
     }
 
 
