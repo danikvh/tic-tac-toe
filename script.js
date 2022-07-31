@@ -142,14 +142,39 @@ let viewController = (function() {
 
     const player1Score = document.getElementById("player1-score")
     const player2Score = document.getElementById("player2-score")
+    const player1NameButton = document.getElementById("button-player1")
+    const player2NameButton = document.getElementById("button-player2")
+    const player1NameInput = document.getElementById("name1")
+    const player2NameInput = document.getElementById("name2")
 
+
+    let changeName = (event) => {
+        const player = event.target.id.slice(7,14)
+
+        //Condensed if / else from below
+        let name = document.getElementById(`${player}-name`)
+        name.textContent = eval(`${player}NameInput`).value + ": "
+        eval(`${player}NameInput`).value = ""
+        /* if (player === "player1") {
+            let name = document.getElementById("player1-name")
+            name.textContent = player1NameInput.value + ": "
+        } else {
+            let name = document.getElementById("player2-name")
+            name.textContent = player2NameInput.value + ": "
+        } */
+    }
 
     //Called by gameboard.checkWin()
     let gameFinish = () => {
         let winner = gameboard.checkWinner()
-        if (winner == "player1") player1Score.textContent++
-        else if (winner == "player2") player2Score.textContent++
+        if (winner === "player1") player1Score.textContent++
+        else if (winner === "player2") player2Score.textContent++
     }
+
+
+    player1NameButton.addEventListener("click", changeName)
+    player2NameButton.addEventListener("click", changeName)
+
 
     return {
         gameFinish
