@@ -1,61 +1,167 @@
+body {
+    margin: 0;
+    background-color: #76BA99;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.set-up {
+    background-color: #CA955C;
+    color: #3b230d;
+    margin-bottom: 20px;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-mode-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
 .game-mode-checkboxes {
     display: flex;
     gap: 30px;
 }
 
+.name-container {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.player-name-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    margin-top: 5px;
+    margin-right: 5px;
+    font-size: 16px;
+    background-color: #EDDFB3;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+input:focus {
+    outline: none;
+}
+
+
+.button-player {
+    background-color: #876445;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
 .score {
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    color: #EDDFB3;
+    font-weight: 700;
+    background-color: #876445;
+    border-radius: 2px;
+}
+
+#score-label {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.player-boxes {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 80px;
+}
+
+.player-box {
+    background-color: #CA955C;
+    border-radius: 5px;
+    width: 100px;
+    text-align: center;
+}
+
+.game-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #876445;
+    width: 500px;
+    height: 330px;
 }
 
 #new-game-button {
-  background-color: #fa6400;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  color: white;
-  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 15px 20px;
-  transition: all 250ms;
-}
-
-#new-game-button:hover,
-#new-game-button:focus {
-  background-color: #fb8332;
-}
-
-#new-game-button:hover {
-  transform: translateY(-1px);
-}
-
-#new-game-button:active {
-  background-color: #c85000;
-  transform: translateY(0);
-}
-
-#new-game-button:disabled,
-#new-game-button[disabled] {
-    background-color: #d8d8d8;
-    transform: translateY(0px);
+    background-color: #CA955C;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: white;
+    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 15px 20px;
+    margin: 20px;
+    transition: all 250ms;
   }
-
-
+  
+  #new-game-button:hover,
+  #new-game-button:focus {
+    background-color: #c59c6f;
+  }
+  
+  #new-game-button:hover {
+    transform: translateY(-1px);
+  }
+  
+  #new-game-button:active {
+    background-color: #815b33;
+    transform: translateY(0);
+  }
+  
+  #new-game-button:disabled,
+  #new-game-button[disabled] {
+      background-color: #d8d8d8;
+      transform: translateY(0px);
+  }
+  
 .gameboard {
     display: grid;
-    grid-template-columns: repeat(3, 50px);
-    grid-template-rows: repeat(3, 50px);
+    grid-template-columns: repeat(3, 60px);
+    grid-template-rows: repeat(3, 60px);
 }
 
 .box {
-    height: 50px;
-    width: 50px;
-    border: 1px solid black;
+    background-color: #76BA99;
+    color: #301804;
+    height: 60px;
+    width: 60px;
+    font-size: 20px;
+    font-weight: 700;
+    border: 2px solid #876445;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 #congratulations {
+    margin-top: 20px;
     color: transparent;
 }

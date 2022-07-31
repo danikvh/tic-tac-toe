@@ -184,15 +184,15 @@ let viewController = (function() {
         if (winner === "player1") {
             player1Score.textContent++
             congrats.textContent = document.getElementById("player1-name").textContent + " wins!"
-            congrats.style.color = "black"
+            congrats.style.color = "white"
         }
         else if (winner === "player2") {
             player2Score.textContent++
             congrats.textContent = document.getElementById("player2-name").textContent + " wins!"
-            congrats.style.color = "black"
+            congrats.style.color = "white"
         } else { //Tie
             congrats.textContent = "It's a tie!"
-            congrats.style.color = "black"
+            congrats.style.color = "white"
         }
     }
 
