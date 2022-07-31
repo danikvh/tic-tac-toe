@@ -3,8 +3,9 @@ let gameboard = (function() {
 
     let gameboard = new Array(9);
     gameboard = ["","","","","","","","",""]
-
+    let winner = ""
     const boxes = document.getElementsByClassName("box")
+    const gameButton = document.getElementById("new-game-button")
 
     const isFullBoard = () => {
         for (let i = 0; i < 9; i++) {
@@ -13,61 +14,85 @@ let gameboard = (function() {
         return true
     }
 
+    const resetBoard = () => {
+        for (let i = 0; i < 9; i++) {
+            gameboard[i] = ""
+            boxes[i].textContent = ""
+        }
+        gameButton.disabled = true;
+    }
+
     const checkWinner = () => {
-        if (checkRowWin() || checkColumnWin() || checkDiagonalWin()) {
+        let res = winner
+        winner = ""
+        return res
+    }
+
+    const checkWin = () => {
+        if (checkRowWin() || checkColumnWin() || checkDiagonalWin() || checkTie()) {
+            viewController.gameFinish()
+            gameButton.disabled = false;
             return true
         }
         return false
     }
 
-    const checkRowWin = () => {
+    let checkRowWin = () => {
         if ((gameboard[0] === gameboard[1] && gameboard[1] === gameboard[2] && gameboard[2] === "X") || 
                 (gameboard[3] === gameboard[4] && gameboard[4] === gameboard[5] && gameboard[5] === "X") || 
                 (gameboard[6] === gameboard[7] && gameboard[7] === gameboard[8] && gameboard[8] === "X")) {
-            console.log("Player Wins")
+            winner = "player1"
             return true
         } else if ((gameboard[0] === gameboard[1] && gameboard[1] === gameboard[2] && gameboard[2] === "O") || 
             (gameboard[3] === gameboard[4] && gameboard[4] === gameboard[5] && gameboard[5] === "O") || 
             (gameboard[6] === gameboard[7] && gameboard[7] === gameboard[8] && gameboard[8] === "O")) {
-            console.log("AI Wins")
+            winner = "player2"
             return true
         } else return false
     }
 
-    const checkColumnWin = () => {
+    let checkColumnWin = () => {
         if ((gameboard[0] === gameboard[3] && gameboard[3] === gameboard[6] && gameboard[6] === "X") || 
                 (gameboard[1] === gameboard[4] && gameboard[4] === gameboard[7] && gameboard[7] === "X") || 
                 (gameboard[2] === gameboard[5] && gameboard[5] === gameboard[8] && gameboard[8] === "X")) {
-            console.log("Player Wins")
+            winner = "player1"
             return true
         } else if ((gameboard[0] === gameboard[3] && gameboard[3] === gameboard[6] && gameboard[6] === "O") || 
                 (gameboard[1] === gameboard[4] && gameboard[4] === gameboard[7] && gameboard[7] === "O") || 
                 (gameboard[2] === gameboard[5] && gameboard[5] === gameboard[8] && gameboard[8] === "O")) {
-            console.log("AI Wins")
+            winner = "player2"
             return true
         } else return false
     }
 
-    const checkDiagonalWin = () => {
+    let checkDiagonalWin = () => {
         if ((gameboard[0] === gameboard[4] && gameboard[4] === gameboard[8] && gameboard[8] === "X") || 
                 (gameboard[2] === gameboard[4] && gameboard[4] === gameboard[6] && gameboard[6] === "X")) {
-            console.log("Player Wins")
-            return true
+            winner = "player1"
+            return true     
         } else if ((gameboard[0] === gameboard[4] && gameboard[4] === gameboard[8] && gameboard[8] === "O") || 
-            (gameboard[2] === gameboard[4] && gameboard[4] === gameboard[6] && gameboard[6] === "O")) {
-            console.log("AI Wins")
+                (gameboard[2] === gameboard[4] && gameboard[4] === gameboard[6] && gameboard[6] === "O")) {
+            winner = "player2"
             return true
         } else return false
     }
+
+    let checkTie= () => {
+        for (let i = 0; i < 9; i++) {
+            if (gameboard[i] === "") return false
+        }
+        winner = "tie"
+        return true;
+    }
     
     const playSpot = (event) => {
-        if (checkWinner()) return 
+        if (winner !== "") return 
         const spot = event.target
         if (spot.textContent == "") {
             spot.textContent = "X"
             gameboard[spot.id.slice(4,5)] = "X"
         } else return
-        if (checkWinner()) return 
+        if (checkWin()) return 
         playSpotAI()
     }
 
@@ -79,20 +104,39 @@ let gameboard = (function() {
         }
         boxes[index].textContent = "O"
         gameboard[index] = "O" 
-        if (checkWinner()) return 
+        if (checkWin()) return 
     }
+
 
     for (let i = 0; i < 9; i++) {
         boxes[i].addEventListener("click", playSpot)
     }
 
-    return {
+    gameButton.addEventListener("click", resetBoard)
 
+    return {
+        checkWin,
+        checkWinner
     }
 })()
 
 //Module for the viewController
 let viewController = (function() {
+
+    const player1Score = document.getElementById("player1-score")
+    const player2Score = document.getElementById("player2-score")
+
+
+    //Called by gameboard.checkWin()
+    let gameFinish = () => {
+        let winner = gameboard.checkWinner()
+        if (winner == "player1") player1Score.textContent++
+        else if (winner == "player2") player2Score.textContent++
+    }
+
+    return {
+        gameFinish
+    }
 
 })()
 

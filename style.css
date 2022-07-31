@@ -1,3 +1,41 @@
+.score {
+    display: flex;
+    gap: 20px;
+}
+
+#new-game-button {
+  background-color: #fa6400;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: white;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 15px 20px;
+  transition: all 250ms;
+}
+
+#new-game-button:hover,
+#new-game-button:focus {
+  background-color: #fb8332;
+}
+
+#new-game-button:hover {
+  transform: translateY(-1px);
+}
+
+#new-game-button:active {
+  background-color: #c85000;
+  transform: translateY(0);
+}
+
+#new-game-button:disabled,
+#new-game-button[disabled] {
+    background-color: #d8d8d8;
+    transform: translateY(0px);
+  }
+
+
 .gameboard {
     display: grid;
     grid-template-columns: repeat(3, 50px);
