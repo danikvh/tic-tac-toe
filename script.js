@@ -160,6 +160,22 @@ let viewController = (function() {
         const player = event.target.id.slice(7,14)
         nameLabels[player].textContent = nameInputs[player].value
         nameInputs[player].value = ""
+
+        // Version with eval()
+        //const player1NameInput = document.getElementById("name1"),
+        //const player2NameInput = document.getElementById("name2")
+        //let name = document.getElementById(`${player}-name`)
+        //name.textContent = eval(`${player}NameInput`).value + ": "
+        //eval(`${player}NameInput`).value = ""
+
+        // Alternative with string interpolation
+        //const players = {
+        //  player1NameInput: document.getElementById("name1"),
+        //  player2NameInput: document.getElementById("name2")
+        //};
+        //let name = document.getElementById(`${player}-name`)
+        //name.textContent = players[`${player}NameInput`].value
+        //players[`${player}NameInput`].value = ''
     }
 
     //Called by gameboard.checkWin()
