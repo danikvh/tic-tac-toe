@@ -152,16 +152,19 @@ let viewController = (function() {
         const player = event.target.id.slice(7,14)
 
         //Condensed if / else from below
-        let name = document.getElementById(`${player}-name`)
-        name.textContent = eval(`${player}NameInput`).value + ": "
-        eval(`${player}NameInput`).value = ""
-        /* if (player === "player1") {
+        //let name = document.getElementById(`${player}-name`)
+        //.textContent = eval(`${player}NameInput`).value + ": "
+        //eval(`${player}NameInput`).value = ""
+
+        if (player === "player1") {
             let name = document.getElementById("player1-name")
             name.textContent = player1NameInput.value + ": "
+            player1NameInput.value = ""
         } else {
             let name = document.getElementById("player2-name")
             name.textContent = player2NameInput.value + ": "
-        } */
+            player2NameInput.value = ""
+        }
     }
 
     //Called by gameboard.checkWin()
